@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+void insert(int arr[], int *n, int pos, int val) {
+    for (int i = *n; i > pos; i--)
+        arr[i] = arr[i - 1];
+    arr[pos] = val;
+    (*n)++;
+}
+
+void delete(int arr[], int *n, int pos) {
+    for (int i = pos; i < *n - 1; i++)
+        arr[i] = arr[i + 1];
+    (*n)--;
+}
+
+void display(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[100], n, ch, val, pos;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+    while (1) {
+        scanf("%d", &ch);
+        if (ch == 1) {
+            scanf("%d%d", &pos, &val);
+            insert(arr, &n, pos, val);
+        } else if (ch == 2) {
+            scanf("%d", &pos);
+            delete(arr, &n, pos);
+        } else if (ch == 3) {
+            display(arr, n);
+        } else {
+            break;
+        }
+    }
+    return 0;
+}
