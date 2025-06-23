@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node {
+    int data;
+    struct Node *l, *r;
+} Node;
+Node* newNode(int d) {
+    Node* n = malloc(sizeof(Node));
+    n->data = d; n->l = n->r = NULL;
+    return n;
+}
+void inorder(Node* r)   { if(r){ inorder(r->l);   printf("%d ", r->data); inorder(r->r); } }
+void preorder(Node* r)  { if(r){ printf("%d ", r->data); preorder(r->l);  preorder(r->r); } }
+void postorder(Node* r) { if(r){ postorder(r->l); postorder(r->r); printf("%d ", r->data); } }
+int main() {
+    Node* r = newNode(1);
+    r->l = newNode(2); r->r = newNode(3);
+    r->l->l = newNode(4); r->l->r = newNode(5);
+    printf("Inorder: "); inorder(r); printf("\n");
+    printf("Preorder: "); preorder(r); printf("\n");
+    printf("Postorder: "); postorder(r); printf("\n");
+    return 0;
+}
+
